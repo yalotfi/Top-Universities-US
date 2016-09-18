@@ -19,8 +19,8 @@ library(dplyr)
 ### Importing/Managing Our Data ###
 ###################################
 ## Import raw data
-inst_raw_data <- read.csv("hd2014.csv") #use name() to see all columns
-admin_raw_data <- read.csv("adm2014.csv")
+inst_raw_data <- read.csv("data/hd2014.csv") #use name() to see all columns
+admin_raw_data <- read.csv("data/adm2014.csv")
 raw_data <- merge(x = inst_raw_data, y = admin_raw_data, by = "UNITID", all.x = TRUE)
 rm(inst_raw_data, admin_raw_data)
 
