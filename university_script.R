@@ -160,17 +160,17 @@ mselect
 ###################
 ### NE Close-Up ###
 ###################
-## State shapefiles
-# gClip <- function(shp, bb) {
-#   if (class(bb) == "matrix") {
-#     b_poly <- as(extent(as.vector(t(bb))), "SpatialPolygons")
-#   } else {
-#     b_poly <- as(extent(bb), "SpatialPolygons")
-#     proj4string(b_poly) <- proj4string(shp)
-#     gIntersection(shp, b_poly, byid = T)
-#   }
-# }
-# states <- gClip(states, matrix(c(-81, 35, -69.5, 45.5), ncol = 2))
+## Clip State Shapefiles to bounding box region (New England)
+gClip <- function(shp, bb) {
+  if (class(bb) == "matrix") {
+    b_poly <- as(extent(as.vector(t(bb))), "SpatialPolygons")
+  } else {
+      b_poly <- as(extent(bb), "SpatialPolygons")
+  }
+  proj4string(b_poly) <- proj4string(shp)
+  gIntersection(shp, b_poly, byid = T)
+}
+states <- gClip(states, matrix(c(-81, 35, -69.5, 45.5), ncol = 2))
 
 states <- spTransform(readOGR(dsn = "shapefiles", layer = "states", stringsAsFactors = F, verbose = F), CRS("+proj=longlat +datum=WGS84"))
 states <- fortify(states)
